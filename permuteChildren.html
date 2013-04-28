@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>permuteChildren()</title>
+<script type="text/javascript">
+
+
+function is_element(node)
+{
+    if (node.nodeType == 1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+function randomize()
+{
+    return 0.5 - Math.random();
+}
+
+function permuteChildren(parent)
+{
+    // Check weather parent is of type 'Element'
+    if (!is_element(parent)) return false;
+
+
+    // Remove all childs from parent
+    // In the process, we keep childs of type 'Element' for later permutation
+    var remaining_childs = [];
+    var child = parent.firstChild;
+    while (child != null)
+    {
+        if (is_element(child)) remaining_childs.push(child);
+        parent.removeChild(child);
+        child = parent.firstChild;
+    }
+
+
+    // Permute remaining childs
+    remaining_childs.sort(randomize);
+
+    // Append childs to parent in permutation order
+    for (var i = 0; i < remaining_childs.length; ++i) 
+    {
+        parent.appendChild(remaining_childs[i]);
+    }
+
+    return true;
+
+	/*
+	Please write this function that:
+
+	- Verifies that the parent is a DOM node of type 'Element'. If not, it abandons by returning false.
+	- Cleans parent from any direct child that is not of type 'Element'.
+	- Randomly permutes parent's direct child elements.
+
+	Once this job acomplished, the function returns true.
+
+
+	Technical specifications:
+
+	- Pure DOM only (no framework)
+	- No HTML manipulation (eg. innerHTML)
+
+
+	Example:
+
+		Given the following structure (hereby represented in HTML):
+
+			<ul>
+				<li>Apple
+					<ul>
+						<li>Golden</li>
+						<li>Lady</li>
+					</ul>
+				</li>
+				<li>Pear</li>
+				<li>Strawberry</li>
+				<li>Lemon</li>
+				This/these text node(s) will be removed by permuteChildren()
+			</ul>
+
+		After the call to:
+		
+			permuteChildren(<the root UL node>)
+
+		The structure would become (for instance):
+
+			<ul>
+				<li>Strawberry</li>
+				<li>Pear</li>
+				<li>Lemon</li>
+				<li>Apple
+					<ul>
+						<li>Golden</li>
+						<li>Lady</li>
+					</ul>
+				</li>
+			</ul>
+
+
+	Once done, we will ask to expose /viva voice/ the way you have proceeded to write the function.
+    */
+}
+
+
+
+/*
+You may use this JavaScript space for the tests. However, please clean it up before submitting your work.
+*/
+
+
+</script>
+</head>
+<body>
+<!--
+
+You may use this HTML space for the tests. However, please clean it up before submitting your work.
+
+-->
+</body>
+</html>
